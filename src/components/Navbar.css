@@ -1,0 +1,46 @@
+.main-nav {
+    color: #fff;
+    background-color: black;
+    padding: 10px 0;    
+}
+
+.nav-items{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-link{
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.nav-logo{
+    width: 200px;
+    height: 33px;
+    margin-right: 70px;
+}
+
+.nav-cart-info{
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-price{
+    margin-right: 10px;
+}
+
+.nav-num-of-items{
+    margin-right: 35px;
+    color: #bfbdbdc4;
+}
+
+
+.nav-cart-icon{
+    width: 20px;
+    height: 26px;
+}
+
