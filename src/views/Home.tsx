@@ -9,7 +9,7 @@ const Home = () => {
       description: "High-quality wireless headphones with noise cancellation.",
       price: 99.99,
       category: "Electronics",
-      url: "/public/wireless_headphones.jpg",
+      url: "/wireless_headphones.jpg",
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ const Home = () => {
       description: "Latest model smartphone with 128GB storage.",
       price: 599.99,
       category: "Electronics",
-      url: "/public/smartphone.jpg",
+      url: "/smartphone.jpg",
     },
     {
       id: 3,
@@ -26,7 +26,7 @@ const Home = () => {
         "Comfortable and lightweight running shoes for all terrains.",
       price: 79.99,
       category: "Sportswear",
-      url: "/public/running_shoes.jpg",
+      url: "/running_shoes.jpg",
     },
     {
       id: 4,
@@ -34,7 +34,7 @@ const Home = () => {
       description: "Durable and spacious backpack with multiple compartments.",
       price: 49.99,
       category: "Accessories",
-      url: "/public/backpack.jpg",
+      url: "/backpack.jpg",
     },
     {
       id: 5,
@@ -42,7 +42,7 @@ const Home = () => {
       description: "Water-resistant smartwatch with health tracking features.",
       price: 199.99,
       category: "Electronics",
-      url: "/public/smartwatch.jpg",
+      url: "/smartwatch.jpg",
     },
     {
       id: 6,
@@ -50,7 +50,7 @@ const Home = () => {
       description: "Portable Bluetooth speaker with excellent sound quality.",
       price: 39.99,
       category: "Electronics",
-      url: "/public/bluetooth_speaker.jpg",
+      url: "/bluetooth_speaker.jpg",
     },
     {
       id: 7,
@@ -58,7 +58,7 @@ const Home = () => {
       description: "Eco-friendly yoga mat with non-slip surface.",
       price: 29.99,
       category: "Fitness",
-      url: "/public/yoga_mat.jpg",
+      url: "/yoga_mat.jpg",
     },
     {
       id: 8,
@@ -67,7 +67,7 @@ const Home = () => {
         "Lightweight laptop with a powerful processor and long battery life.",
       price: 899.99,
       category: "Electronics",
-      url: "/public/laptop.jpg",
+      url: "/laptop.jpg",
     },
     {
       id: 9,
@@ -75,7 +75,7 @@ const Home = () => {
       description: "Stylish sunglasses with UV protection.",
       price: 19.99,
       category: "Accessories",
-      url: "/public/sunglasses.jpg",
+      url: "/sunglasses.jpg",
     },
     {
       id: 10,
@@ -84,14 +84,13 @@ const Home = () => {
         "Ergonomic gaming chair with adjustable armrests and lumbar support.",
       price: 149.99,
       category: "Furniture",
-      url: "/public/gaming_chair.jpg",
+      url: "/gaming_chair.jpg",
     },
   ];
 
   return (
     <>
       <div className="container">
-        <h2>Products</h2>
         <ProductList products={products}/>
       </div>
     </>

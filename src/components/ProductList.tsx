@@ -11,7 +11,7 @@ const ProductList = (props: ProductListProps) => {
     <>
       <div className={ProductListCSS.productList}>
         {props.products ? props.products.map((product)=>{
-            return <Product key={product.id} name={product.name} price={product.price} url={product.url}/>
+            return <Product key={product.id} product={product}/>
         }) : null}
       </div>
     </>
