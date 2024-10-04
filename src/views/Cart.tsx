@@ -1,7 +1,11 @@
+import CartTable from "../components/CartTable";
+
 const Cart = () => {
   return (
     <>
-      <h1>Cart</h1>
+      <div className="container">
+        <CartTable/>
+      </div>
     </>
   );
 };

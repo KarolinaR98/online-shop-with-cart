@@ -27,20 +27,12 @@ const Navbar = () => {
   const totalQuantity = getTotal(cartItems).totalQuantity;
   const totalPrice = getTotal(cartItems).totalPrice;
 
-  const handleMouseEnter = () => {
-    setCartVisible(true);
-  };
-
-  const handleMouseLeave = () => {
-    setCartVisible(false);
-  };
-
   return (
     <>
       <nav className={NavbarCSS.mainNav}>
         <div className={`container ${NavbarCSS.navItems}`}>
           <div className={NavbarCSS.logoHolder}>
-            <Link className={NavbarCSS.link} to="/">
+            <Link className={NavbarCSS.link} to="/" onClick={()=>{setCartVisible(false)}}>
               <img className={NavbarCSS.logo} src={logo} alt="Logo" />
             </Link>
           </div>
@@ -49,14 +41,14 @@ const Navbar = () => {
             <span className={NavbarCSS.numOfItems}>
               {totalQuantity} {totalQuantity === 1 ? "item" : "items"}
             </span>
-            <Link
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className={NavbarCSS.link}
-              to="/cart"
+            <button
+              onClick={() => {
+                setCartVisible(!isCartVisible);
+              }}
+              className={NavbarCSS.btn}
             >
               <img className={NavbarCSS.cartIcon} src={cartIcon} alt="Cart" />
-            </Link>
+            </button>
           </div>
         </div>
       </nav>
@@ -72,15 +64,18 @@ const Navbar = () => {
             </p>
           </div>
           <div className={NavbarCSS.cartProducts}>
-            {cartItems.length > 0 ? (
+            {cartItems.length ? (
               <div className={NavbarCSS.productList}>
                 {cartItems.map((item) => {
-                  return <div key={item.id} className={NavbarCSS.product}>
-                  <p className={NavbarCSS.productName}>{item.name}</p>
-                  <p className={NavbarCSS.priceAndQuantity}>{item.quantity} x {item.price}</p>
-                </div>
+                  return (
+                    <div key={item.id} className={NavbarCSS.product}>
+                      <p className={NavbarCSS.productName}>{item.name}</p>
+                      <p className={NavbarCSS.priceAndQuantity}>
+                        {item.quantity} x {item.price}
+                      </p>
+                    </div>
+                  );
                 })}
-                
               </div>
             ) : (
               <div className={NavbarCSS.emptyCart}>
@@ -93,6 +88,11 @@ const Navbar = () => {
               </div>
             )}
           </div>
+          <div className={NavbarCSS.btnCartHolder}>
+                  <Link className={`${NavbarCSS.cartBtn} ${NavbarCSS.link}`} to="/cart" onClick={()=>{setCartVisible(false)}}>
+                      Go to Cart
+                  </Link>
+                </div>
         </div>
       )}
     </>

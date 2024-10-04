@@ -1,0 +1,124 @@
+.productTable{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.productTable thead,
+.productTable tfoot{
+    background-color: #edecec;
+}
+
+.productTable th{
+    padding: 15px;
+}
+
+.productTable th,
+.productTable td {
+    width: 19%;
+}
+
+.productTable th.removeCol,
+.productTable td.removeCol{
+    width: 5%;
+}
+
+.btnRemove,
+.btnPlus,
+.btnMinus{
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.removeIcon{
+    width: 20px;
+}
+
+.productPhoto{
+    max-width: 100%;
+    max-height: 100%;
+    width: 100px;
+    height: 100px;
+    padding: 5px 0;
+}
+
+.quantityHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plusIcon,
+.minusIcon{
+    width: 20px;
+}
+
+.quantityNumber{
+    margin: 0 10px;
+}
+
+.cellHeader{
+    display: none;
+}
+
+
+.totalPrice{
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.proceedBtnHolder{
+    text-align: center;
+    margin: 20px 0;
+}
+
+.proceedBtn{
+    padding: 10px 20px;
+    margin: auto;
+    cursor: pointer;
+    background-color: #1f1e1e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.proceedBtn:hover{
+    background-color: #000;
+}
+
+@media (max-width: 768px){
+
+    .productTable th{
+        display: none;
+    }
+
+    .productTable td{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+
+    .removeIcon{
+        width: 25px;
+    }
+
+    .productPhoto{
+        margin: auto;
+    }
+
+    .cellHeader{
+        display: block;
+        font-weight: 700;
+    }
+}
+
+@media (max-width: 576px){
+    .productTable{
+        width: 80%;
+        margin: auto;
+    }
+}

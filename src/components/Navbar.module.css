@@ -18,7 +18,6 @@
 .link{
     color: #fff;
     text-decoration: none;
-    text-transform: uppercase;
     font-weight: 600;
 }
 
@@ -43,6 +42,11 @@
     color: #bfbdbdc4;
 }
 
+.btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
 .cartIcon{
     width: 20px;
@@ -75,7 +79,7 @@
 }
 
 .productList{
-    height: 240px;
+    height: 180px;
     padding: 15px;
     overflow: auto;
 }
@@ -88,8 +92,26 @@
     border-bottom: 1px solid #bfbdbd;
 }
 
+.btnCartHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.cartBtn{
+    border: 2px solid #bfbdbd;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+
+.cartBtn:hover{
+    background-color: #000;
+}
+
 .emptyCart{
-    height: 240px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,9 +133,9 @@
         padding-left: 20px;
     }
 
-    .cartInfo{
+    .cartInfo,
+    .dropdownCart{
         display: none;
     }
-    
 }
 

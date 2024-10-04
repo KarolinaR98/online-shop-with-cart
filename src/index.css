@@ -10,8 +10,16 @@
     margin: auto;
 }
 
+.heading{
+    margin: 20px 0;
+}
+
 @media (max-width: 576px){
     .container{
         width: 100%;
+    }
+
+    .heading{
+        padding-left: 20px;
     }
 }
