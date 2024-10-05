@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 import logo from "/logo.png";
 import cartIcon from "/bag-icon.png";
 import emptyCart from "/empty-cart.png";
-import NavbarCSS from "./Navbar.module.css";
+import styles from "./Navbar.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { ProductType } from "../types";
+import SingleProduct from "../types";
 
 const Navbar = () => {
   const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
 
-  const getTotal = (cartItems: ProductType[]) => {
+  const getTotal = (cartItems: SingleProduct[]) => {
     let totalPrice: number = 0;
     let totalQuantity: number = 0;
 
@@ -29,67 +29,67 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={NavbarCSS.mainNav}>
-        <div className={`container ${NavbarCSS.navItems}`}>
-          <div className={NavbarCSS.logoHolder}>
-            <Link className={NavbarCSS.link} to="/" onClick={()=>{setCartVisible(false)}}>
-              <img className={NavbarCSS.logo} src={logo} alt="Logo" />
+      <nav className={styles.mainNav}>
+        <div className={`container ${styles.navItems}`}>
+          <div className={styles.logoHolder}>
+            <Link className={styles.link} to="/" onClick={()=>{setCartVisible(false)}}>
+              <img className={styles.logo} src={logo} alt="Logo" />
             </Link>
           </div>
-          <div className={NavbarCSS.cartInfo}>
-            <span className={NavbarCSS.price}>${totalPrice.toFixed(2)}</span>
-            <span className={NavbarCSS.numOfItems}>
+          <div className={styles.cartInfo}>
+            <span className={styles.price}>${totalPrice.toFixed(2)}</span>
+            <span className={styles.numOfItems}>
               {totalQuantity} {totalQuantity === 1 ? "item" : "items"}
             </span>
             <button
               onClick={() => {
                 setCartVisible(!isCartVisible);
               }}
-              className={NavbarCSS.btn}
+              className={styles.btn}
             >
-              <img className={NavbarCSS.cartIcon} src={cartIcon} alt="Cart" />
+              <img className={styles.cartIcon} src={cartIcon} alt="Cart" />
             </button>
           </div>
         </div>
       </nav>
       {isCartVisible && (
-        <div className={NavbarCSS.dropdownCart}>
-          <div className={NavbarCSS.cartSummary}>
+        <div className={styles.dropdownCart}>
+          <div className={styles.cartSummary}>
             <p>Your Cart:</p>
             <p>
               Total:{" "}
-              <span className={NavbarCSS.totalPrice}>
+              <span className={styles.totalPrice}>
                 ${totalPrice.toFixed(2)}
               </span>
             </p>
           </div>
-          <div className={NavbarCSS.cartProducts}>
+          <div className={styles.cartProducts}>
             {cartItems.length ? (
-              <div className={NavbarCSS.productList}>
-                {cartItems.map((item) => {
+              <div className={styles.productList}>
+                {cartItems.map((product) => {
                   return (
-                    <div key={item.id} className={NavbarCSS.product}>
-                      <p className={NavbarCSS.productName}>{item.name}</p>
-                      <p className={NavbarCSS.priceAndQuantity}>
-                        {item.quantity} x {item.price}
+                    <div key={product.id} className={styles.product}>
+                      <p className={styles.productName}>{product.name}</p>
+                      <p className={styles.priceAndQuantity}>
+                        {product.quantity} x {product.price}
                       </p>
                     </div>
                   );
                 })}
               </div>
             ) : (
-              <div className={NavbarCSS.emptyCart}>
+              <div className={styles.emptyCart}>
                 <img
-                  className={NavbarCSS.emptyCartIcon}
+                  className={styles.emptyCartIcon}
                   src={emptyCart}
                   alt="Empty Cart"
                 />
-                <p className={NavbarCSS.emptyCartMsg}>Your cart is empty</p>
+                <p className={styles.emptyCartMsg}>Your cart is empty</p>
               </div>
             )}
           </div>
-          <div className={NavbarCSS.btnCartHolder}>
-                  <Link className={`${NavbarCSS.cartBtn} ${NavbarCSS.link}`} to="/cart" onClick={()=>{setCartVisible(false)}}>
+          <div className={styles.btnCartHolder}>
+                  <Link className={`${styles.cartBtn} ${styles.link}`} to="/cart" onClick={()=>{setCartVisible(false)}}>
                       Go to Cart
                   </Link>
                 </div>

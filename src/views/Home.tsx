@@ -1,8 +1,8 @@
 import ProductList from "../components/ProductList";
-import { ProductType } from "../types";
+import SingleProduct from "../types";
 
 const Home = () => {
-  const products: ProductType[] = [
+  const products: SingleProduct[] = [
     {
       id: 1,
       name: "Wireless Headphones",
@@ -89,11 +89,9 @@ const Home = () => {
   ];
 
   return (
-    <>
-      <div className="container">
-        <ProductList products={products}/>
-      </div>
-    </>
+    <div className="container">
+      <ProductList products={products} />
+    </div>
   );
 };
 

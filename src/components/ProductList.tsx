@@ -1,17 +1,17 @@
-import { ProductType } from "../types";
+import SingleProduct from "../types";
 import Product from "./Product";
-import ProductListCSS from "./ProductList.module.css"
+import styles from "./ProductList.module.css"
 
 type ProductListProps = {
-    products:  ProductType[];
+    products:  SingleProduct[];
 }
 
 const ProductList = (props: ProductListProps) => {
   return (
     <>
     <h2 className="heading">Products</h2>
-      <div className={ProductListCSS.productList}>
-        {props.products ? props.products.map((product)=>{
+      <div className={styles.productList}>
+        {props.products.length ? props.products.map((product)=>{
             return <Product key={product.id} product={product}/>
         }) : null}
       </div>

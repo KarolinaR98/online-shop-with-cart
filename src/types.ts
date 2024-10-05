@@ -1,4 +1,4 @@
-export type ProductType = {
+type SingleProduct = {
     id: number,
     name: string,
     description: string,
@@ -7,3 +7,4 @@ export type ProductType = {
     url: string,
     quantity?: number
 }
+export default SingleProduct

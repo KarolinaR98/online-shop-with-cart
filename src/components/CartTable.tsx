@@ -1,29 +1,17 @@
-import CartTableCSS from "./CartTable.module.css";
+import styles from "./CartTable.module.css";
 import removeIcon from "/remove-icon.png";
 import plusIcon from "/plus-icon.png";
 import minusIcon from "/minus-icon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { ProductType } from "../types";
+import SingleProduct from "../types";
 import { removeItem, increaseQuantity, decreaseQuantity } from "../store/slice/cartSlice";
 
 const CartTable = () => {
   const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
   const dispatch = useDispatch();
 
-  const removeFromCart = (product: ProductType) => {
-    dispatch(removeItem(product));
-  };
-
-  const increaseProductQuantity = (product: ProductType) => {
-    dispatch(increaseQuantity(product));
-  }
-
-  const decreaseProductQuantity = (product: ProductType) => {
-    dispatch(decreaseQuantity(product));
-  }
-
-  const getTotal = (cartItems: ProductType[]) => {
+  const getTotal = (cartItems: SingleProduct[]) => {
     let totalPrice: number = 0;
 
     cartItems.forEach((item) => {
@@ -33,7 +21,7 @@ const CartTable = () => {
     return totalPrice;
   };
 
-  const getSubtotal = (cartItem: ProductType) => {
+  const getSubtotal = (cartItem: SingleProduct) => {
     return cartItem.price * cartItem.quantity!;
   };
 
@@ -42,10 +30,10 @@ const CartTable = () => {
       <h2 className="heading">Your Cart</h2>
       {cartItems.length ? (
         <div>
-          <table className={CartTableCSS.productTable}>
+          <table className={styles.productTable}>
             <thead>
               <tr>
-                <th className={CartTableCSS.removeCol}></th>
+                <th className={styles.removeCol}></th>
                 <th></th>
                 <th>Product</th>
                 <th>Price</th>
@@ -54,16 +42,16 @@ const CartTable = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item) => {
+              {cartItems.map((product) => {
                 return (
-                  <tr key={item.id}>
-                    <td className={CartTableCSS.removeCol}>
+                  <tr key={product.id}>
+                    <td className={styles.removeCol}>
                       <button
-                        className={CartTableCSS.btnRemove}
-                        onClick={() => removeFromCart(item)}
+                        className={styles.btnRemove}
+                        onClick={() => dispatch(removeItem(product.id))}
                       >
                         <img
-                          className={CartTableCSS.removeIcon}
+                          className={styles.removeIcon}
                           src={removeIcon}
                           alt="Remove"
                         />
@@ -71,41 +59,41 @@ const CartTable = () => {
                     </td>
                     <td>
                       <img
-                        className={CartTableCSS.productPhoto}
-                        src={item.url}
+                        className={styles.productPhoto}
+                        src={product.url}
                         alt="Product"
                       />
                     </td>
                     <td>
-                      <span className={CartTableCSS.cellHeader}>Product:</span>
-                      {item.name}
+                      <span className={styles.cellHeader}>Product:</span>
+                      {product.name}
                     </td>
                     <td>
-                      <span className={CartTableCSS.cellHeader}>Price:</span>$
-                      {item.price}
+                      <span className={styles.cellHeader}>Price:</span>$
+                      {product.price}
                     </td>
                     <td>
-                      <span className={CartTableCSS.cellHeader}>Quantity:</span>
-                      <div className={CartTableCSS.quantityHolder}>
+                      <span className={styles.cellHeader}>Quantity:</span>
+                      <div className={styles.quantityHolder}>
                         <button
-                          className={CartTableCSS.btnPlus}
-                          onClick={() => increaseProductQuantity(item)}
+                          className={styles.btnPlus}
+                          onClick={() => dispatch(increaseQuantity(product.id))}
                         >
                           <img
-                            className={CartTableCSS.plusIcon}
+                            className={styles.plusIcon}
                             src={plusIcon}
                             alt="Plus"
                           />
                         </button>
-                        <span className={CartTableCSS.quantityNumber}>
-                          {item.quantity}
+                        <span className={styles.quantityNumber}>
+                          {product.quantity}
                         </span>
                         <button
-                          className={CartTableCSS.btnMinus}
-                          onClick={() => decreaseProductQuantity(item)}
+                          className={styles.btnMinus}
+                          onClick={() => dispatch(decreaseQuantity(product.id))}
                         >
                           <img
-                            className={CartTableCSS.minusIcon}
+                            className={styles.minusIcon}
                             src={minusIcon}
                             alt="Minus"
                           />
@@ -113,8 +101,8 @@ const CartTable = () => {
                       </div>
                     </td>
                     <td>
-                      <span className={CartTableCSS.cellHeader}>Subtotal:</span>
-                      ${(getSubtotal(item)).toFixed(2)}
+                      <span className={styles.cellHeader}>Subtotal:</span>
+                      ${(getSubtotal(product)).toFixed(2)}
                     </td>
                   </tr>
                 );
@@ -123,21 +111,21 @@ const CartTable = () => {
             <tfoot>
               <tr>
                 <td colSpan={5}></td>
-                <td className={CartTableCSS.totalPrice}>
-                  <span className={CartTableCSS.cellHeader}>Total:</span>$
+                <td className={styles.totalPrice}>
+                  <span className={styles.cellHeader}>Total:</span>$
                   {(getTotal(cartItems)).toFixed(2)}
                 </td>
               </tr>
             </tfoot>
           </table>
-          <div className={CartTableCSS.proceedBtnHolder}>
-            <button className={CartTableCSS.proceedBtn}>
+          <div className={styles.proceedBtnHolder}>
+            <button className={styles.proceedBtn}>
               Proceed to checkout
             </button>
           </div>
         </div>
       ) : (
-        <div className={CartTableCSS.emptyCart}>Empty</div>
+        <div className={styles.emptyCart}>Empty</div>
       )}
     </>
   );

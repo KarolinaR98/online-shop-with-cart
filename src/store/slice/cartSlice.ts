@@ -1,64 +1,48 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProductType } from "../../types";
+import SingleProduct from "../../types";
 
 export interface CartState {
-  cart: ProductType[];
+  cart: SingleProduct[];
 }
 
-interface IncereaseQuantityPayload {
-  id: number;
-}
-
-interface DecreaseQuantityPayload {
-  id: number;
-}
-
-interface RemoveQuantityPayload {
-  id: number;
-}
+const initialState: CartState = {
+  cart: [],
+};
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: { cart: [] } as CartState,
+  initialState,
   reducers: {
     addToCart: (state, action) => {
       const itemInCart = state.cart.find(
         (item) => item.id === action.payload.id
       );
 
-      if (itemInCart) {
-        if (itemInCart.quantity !== undefined) {
-          itemInCart.quantity++;
-        }
+      if (itemInCart?.quantity) {
+        itemInCart.quantity++;
       } else {
-        state.cart.push({ ...action.payload, quantity: 1 });
+        state.cart = state.cart.concat({ ...action.payload, quantity: 1 });
       }
     },
 
-    increaseQuantity: (
-      state,
-      action: PayloadAction<IncereaseQuantityPayload>
-    ) => {
-      const item = state.cart.find((item) => item.id === action.payload.id);
-      if (item && item.quantity !== undefined) {
-        item.quantity++;
+    increaseQuantity: (state, action: PayloadAction<number>) => {
+      const itemInCart = state.cart.find((item) => item.id === action.payload);
+      if (itemInCart?.quantity) {
+        itemInCart.quantity++;
       }
     },
 
-    decreaseQuantity: (
-      state,
-      action: PayloadAction<DecreaseQuantityPayload>
-    ) => {
-      const item = state.cart.find((item) => item.id === action.payload.id);
-      if (item && item.quantity !== undefined && item.quantity > 1) {
-        item.quantity--;
-      } else if (item && item.quantity !== undefined && item.quantity === 1) {
-        state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+    decreaseQuantity: (state, action: PayloadAction<number>) => {
+      const itemInCart = state.cart.find((item) => item.id === action.payload);
+      if (itemInCart?.quantity && itemInCart.quantity > 1) {
+        itemInCart.quantity--;
+      } else if (itemInCart?.quantity && itemInCart.quantity === 1) {
+        state.cart = state.cart.filter((item) => item.id !== action.payload);
       }
     },
 
-    removeItem: (state, action: PayloadAction<RemoveQuantityPayload>) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+    removeItem: (state, action: PayloadAction<number>) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
   },
 });
