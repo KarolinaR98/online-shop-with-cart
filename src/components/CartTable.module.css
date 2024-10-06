@@ -1,15 +1,25 @@
-.productTable{
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+  }
+
+.productTable {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
 }
 
 .productTable thead,
-.productTable tfoot{
+.productTable tfoot {
     background-color: #edecec;
 }
 
-.productTable th{
+.productTable th {
     padding: 15px;
 }
 
@@ -19,23 +29,33 @@
 }
 
 .productTable th.removeCol,
-.productTable td.removeCol{
+.productTable td.removeCol {
     width: 5%;
 }
 
-.btnRemove,
-.btnPlus,
-.btnMinus{
-    border: none;
+.roundBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: 50%;
     background-color: #fff;
     cursor: pointer;
+    width: 25px;
+    height: 25px;
 }
 
-.removeIcon{
-    width: 20px;
+.roundBtnContent {
+    display: block;
+    font-size: 20px;
 }
 
-.productPhoto{
+.removeBtn{
+    font-weight: 700;
+    padding-bottom: 1px;
+}
+
+.productPhoto {
     max-width: 100%;
     max-height: 100%;
     width: 100px;
@@ -43,38 +63,36 @@
     padding: 5px 0;
 }
 
-.quantityHolder{
+.quantityHolder {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.plusIcon,
-.minusIcon{
-    width: 20px;
-}
-
-.quantityNumber{
+.quantityNumber {
     margin: 0 10px;
+    width: 40px;
+    border: none;
+    text-align: center;
 }
 
-.cellHeader{
+.cellHeader {
     display: none;
 }
 
 
-.totalPrice{
+.totalPrice {
     padding: 15px;
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-.proceedBtnHolder{
+.proceedBtnHolder {
     text-align: center;
     margin: 20px 0;
 }
 
-.proceedBtn{
+.proceedBtn {
     padding: 10px 20px;
     margin: auto;
     cursor: pointer;
@@ -85,39 +103,35 @@
     border: none;
 }
 
-.proceedBtn:hover{
+.proceedBtn:hover {
     background-color: #000;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 
-    .productTable th{
+    .productTable th {
         display: none;
     }
 
-    .productTable td{
+    .productTable td {
         width: 100%;
         display: flex;
         justify-content: space-between;
         margin: 10px 0;
     }
 
-    .removeIcon{
-        width: 25px;
-    }
-
-    .productPhoto{
+    .productPhoto {
         margin: auto;
     }
 
-    .cellHeader{
+    .cellHeader {
         display: block;
         font-weight: 700;
     }
 }
 
-@media (max-width: 576px){
-    .productTable{
+@media (max-width: 576px) {
+    .productTable {
         width: 80%;
         margin: auto;
     }

@@ -6,26 +6,13 @@ import styles from "./Navbar.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import SingleProduct from "../types";
 
 const Navbar = () => {
   const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
-
-  const getTotal = (cartItems: SingleProduct[]) => {
-    let totalPrice: number = 0;
-    let totalQuantity: number = 0;
-
-    cartItems.forEach((item) => {
-      totalQuantity += item.quantity!;
-      totalPrice += item.quantity! * item.price;
-    });
-
-    return { totalPrice, totalQuantity };
-  };
+  const totalPrice = useSelector((state: RootState)=> state.cartReducer.totalPrice);
+  const totalQuantity = useSelector((state: RootState) => state.cartReducer.totalQuantity); 
 
   const [isCartVisible, setCartVisible] = useState<boolean>(false);
-  const totalQuantity = getTotal(cartItems).totalQuantity;
-  const totalPrice = getTotal(cartItems).totalPrice;
 
   return (
     <>

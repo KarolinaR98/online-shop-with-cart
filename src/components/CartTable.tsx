@@ -1,28 +1,44 @@
 import styles from "./CartTable.module.css";
-import removeIcon from "/remove-icon.png";
-import plusIcon from "/plus-icon.png";
-import minusIcon from "/minus-icon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import SingleProduct from "../types";
-import { removeItem, increaseQuantity, decreaseQuantity } from "../store/slice/cartSlice";
+import {
+  removeItem,
+  increaseQuantity,
+  decreaseQuantity,
+  calculateSubtotal,
+  updateQuantity,
+} from "../store/slice/cartSlice";
 
 const CartTable = () => {
   const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
+  const totalPrice = useSelector(
+    (state: RootState) => state.cartReducer.totalPrice
+  );
   const dispatch = useDispatch();
 
-  const getTotal = (cartItems: SingleProduct[]) => {
-    let totalPrice: number = 0;
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    itemId: number
+  ): void => {
+    const value = e.target.value;
+    const quantity = Number(e.target.value);
 
-    cartItems.forEach((item) => {
-      totalPrice += item.quantity! * item.price;
-    });
+    if (/^[+-]?\d+(\.\d+)?$/.test(value)) return;
 
-    return totalPrice;
+    if (quantity > 0 && quantity < 100) {
+      dispatch(updateQuantity({ itemId, quantity }));
+    }
   };
 
-  const getSubtotal = (cartItem: SingleProduct) => {
-    return cartItem.price * cartItem.quantity!;
+  const handleBlur = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    itemId: number
+  ): void => {
+    const value = e.target.value;
+
+    if (value === "" || Number(value) < 1) {
+      dispatch(updateQuantity({ itemId, quantity: 1 }));
+    }
   };
 
   return (
@@ -47,14 +63,10 @@ const CartTable = () => {
                   <tr key={product.id}>
                     <td className={styles.removeCol}>
                       <button
-                        className={styles.btnRemove}
+                        className={`${styles.roundBtn} ${styles.removeBtn}`}
                         onClick={() => dispatch(removeItem(product.id))}
                       >
-                        <img
-                          className={styles.removeIcon}
-                          src={removeIcon}
-                          alt="Remove"
-                        />
+                        X
                       </button>
                     </td>
                     <td>
@@ -76,33 +88,29 @@ const CartTable = () => {
                       <span className={styles.cellHeader}>Quantity:</span>
                       <div className={styles.quantityHolder}>
                         <button
-                          className={styles.btnPlus}
-                          onClick={() => dispatch(increaseQuantity(product.id))}
-                        >
-                          <img
-                            className={styles.plusIcon}
-                            src={plusIcon}
-                            alt="Plus"
-                          />
-                        </button>
-                        <span className={styles.quantityNumber}>
-                          {product.quantity}
-                        </span>
-                        <button
-                          className={styles.btnMinus}
+                          className={styles.roundBtn}
                           onClick={() => dispatch(decreaseQuantity(product.id))}
                         >
-                          <img
-                            className={styles.minusIcon}
-                            src={minusIcon}
-                            alt="Minus"
-                          />
+                          <span className={styles.roundBtnContent}>-</span>
+                        </button>
+                        <input
+                          className={styles.quantityNumber}
+                          type="number"
+                          defaultValue={product.quantity}
+                          onChange={(e) => handleInputChange(e, product.id)}
+                          onBlur={(e) => handleBlur(e, product.id)}
+                        />
+                        <button
+                          className={styles.roundBtn}
+                          onClick={() => dispatch(increaseQuantity(product.id))}
+                        >
+                          <span className={styles.roundBtnContent}>+</span>
                         </button>
                       </div>
                     </td>
                     <td>
-                      <span className={styles.cellHeader}>Subtotal:</span>
-                      ${(getSubtotal(product)).toFixed(2)}
+                      <span className={styles.cellHeader}>Subtotal:</span>$
+                      {calculateSubtotal(cartItems, product.id).toFixed(2)}
                     </td>
                   </tr>
                 );
@@ -113,15 +121,13 @@ const CartTable = () => {
                 <td colSpan={5}></td>
                 <td className={styles.totalPrice}>
                   <span className={styles.cellHeader}>Total:</span>$
-                  {(getTotal(cartItems)).toFixed(2)}
+                  {totalPrice.toFixed(2)}
                 </td>
               </tr>
             </tfoot>
           </table>
           <div className={styles.proceedBtnHolder}>
-            <button className={styles.proceedBtn}>
-              Proceed to checkout
-            </button>
+            <button className={styles.proceedBtn}>Proceed to checkout</button>
           </div>
         </div>
       ) : (
