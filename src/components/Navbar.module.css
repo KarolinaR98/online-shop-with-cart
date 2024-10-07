@@ -60,7 +60,7 @@
     width: 350px;
     color: #fff;
     border: 3px solid #bfbdbd;
-    background-color: #1f1e1e;
+    background-color: #000;
     z-index: 999;
 }
 
@@ -101,6 +101,7 @@
 
 .cartBtn{
     border: 2px solid #bfbdbd;
+    background-color: #1f1e1e;
     text-align: center;
     padding: 10px 20px;
     margin-bottom: 15px;
@@ -127,7 +128,7 @@
     font-size: 1.2rem;
     font-weight: 500;
 }
-@media (max-width: 576px){
+@media (max-width: 600px){
 
     .mainNav{
         padding-left: 20px;

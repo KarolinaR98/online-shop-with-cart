@@ -3,7 +3,7 @@ import logo from "/logo.png";
 import cartIcon from "/bag-icon.png";
 import emptyCart from "/empty-cart.png";
 import styles from "./Navbar.module.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
@@ -13,6 +13,17 @@ const Navbar = () => {
   const totalQuantity = useSelector((state: RootState) => state.cartReducer.totalQuantity); 
 
   const [isCartVisible, setCartVisible] = useState<boolean>(false);
+  const dropdownCart = useRef<HTMLDivElement>(null);
+
+  useEffect(()=>{
+    let handler = (e: MouseEvent | TouchEvent) => {
+      if(dropdownCart.current && !dropdownCart.current.contains(e.target as Node)){
+        setCartVisible(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handler);
+  });
 
   return (
     <>
@@ -40,7 +51,7 @@ const Navbar = () => {
         </div>
       </nav>
       {isCartVisible && (
-        <div className={styles.dropdownCart}>
+        <div className={styles.dropdownCart} ref={dropdownCart}>
           <div className={styles.cartSummary}>
             <p>Your Cart:</p>
             <p>
