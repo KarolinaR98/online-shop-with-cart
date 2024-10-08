@@ -107,6 +107,28 @@ input[type=number] {
     background-color: #000;
 }
 
+.emptyCart{
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emptyCartIcon{
+    max-width: 300px;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.emptyCartHeading{
+    margin-bottom: 20px;
+}
+
+.emptyCartText{
+    font-weight: 500;
+}
+
 @media (max-width: 768px) {
 
     .productTable th {
@@ -130,8 +152,9 @@ input[type=number] {
     }
 }
 
-@media (max-width: 576px) {
-    .productTable {
+@media (max-width: 600px) {
+    .productTable,
+    .emptyCart{
         width: 80%;
         margin: auto;
     }

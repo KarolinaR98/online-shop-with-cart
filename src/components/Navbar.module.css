@@ -30,6 +30,7 @@
 .cartInfo{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 
@@ -42,15 +43,10 @@
     color: #bfbdbdc4;
 }
 
-.btn{
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 .cartIcon{
     width: 20px;
     height: 26px;
+    display: block;
 }
 
 .dropdownCart{

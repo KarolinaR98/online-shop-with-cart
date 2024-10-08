@@ -9,18 +9,25 @@ import { RootState } from "../store/store";
 
 const Navbar = () => {
   const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
-  const totalPrice = useSelector((state: RootState)=> state.cartReducer.totalPrice);
-  const totalQuantity = useSelector((state: RootState) => state.cartReducer.totalQuantity); 
+  const totalPrice = useSelector(
+    (state: RootState) => state.cartReducer.totalPrice
+  );
+  const totalQuantity = useSelector(
+    (state: RootState) => state.cartReducer.totalQuantity
+  );
 
   const [isCartVisible, setCartVisible] = useState<boolean>(false);
   const dropdownCart = useRef<HTMLDivElement>(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     let handler = (e: MouseEvent | TouchEvent) => {
-      if(dropdownCart.current && !dropdownCart.current.contains(e.target as Node)){
-        setCartVisible(false)
+      if (
+        dropdownCart.current &&
+        !dropdownCart.current.contains(e.target as Node)
+      ) {
+        setCartVisible(false);
       }
-    }
+    };
 
     document.addEventListener("mousedown", handler);
   });
@@ -30,23 +37,27 @@ const Navbar = () => {
       <nav className={styles.mainNav}>
         <div className={`container ${styles.navItems}`}>
           <div className={styles.logoHolder}>
-            <Link className={styles.link} to="/" onClick={()=>{setCartVisible(false)}}>
+            <Link
+              className={styles.link}
+              to="/"
+              onClick={() => {
+                setCartVisible(false);
+              }}
+            >
               <img className={styles.logo} src={logo} alt="Logo" />
             </Link>
           </div>
-          <div className={styles.cartInfo}>
+          <div
+            onClick={() => {
+              setCartVisible(!isCartVisible);
+            }}
+            className={styles.cartInfo}
+          >
             <span className={styles.price}>${totalPrice.toFixed(2)}</span>
             <span className={styles.numOfItems}>
               {totalQuantity} {totalQuantity === 1 ? "item" : "items"}
             </span>
-            <button
-              onClick={() => {
-                setCartVisible(!isCartVisible);
-              }}
-              className={styles.btn}
-            >
-              <img className={styles.cartIcon} src={cartIcon} alt="Cart" />
-            </button>
+            <img className={styles.cartIcon} src={cartIcon} alt="Cart" />
           </div>
         </div>
       </nav>
@@ -87,10 +98,16 @@ const Navbar = () => {
             )}
           </div>
           <div className={styles.btnCartHolder}>
-                  <Link className={`${styles.cartBtn} ${styles.link}`} to="/cart" onClick={()=>{setCartVisible(false)}}>
-                      Go to Cart
-                  </Link>
-                </div>
+            <Link
+              className={`${styles.cartBtn} ${styles.link}`}
+              to="/cart"
+              onClick={() => {
+                setCartVisible(false);
+              }}
+            >
+              Go to Cart
+            </Link>
+          </div>
         </div>
       )}
     </>

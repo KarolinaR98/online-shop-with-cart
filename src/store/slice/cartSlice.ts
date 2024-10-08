@@ -100,16 +100,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const calculateSubtotal = (cart: SingleProduct[], productId : number) : number => {
-  const itemInCart = cart.find((item) => item.id === productId);
-
-  if(itemInCart){
-    return itemInCart.price * itemInCart.quantity!;
-  } else {
-    return 0;
-  }
-}
-
 export const { addToCart, increaseQuantity, decreaseQuantity, removeItem, updateQuantity } =
   cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

@@ -1,13 +1,15 @@
 import styles from "./CartTable.module.css";
+import emptyCart from "/empty-cart.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import {
   removeItem,
   increaseQuantity,
   decreaseQuantity,
-  calculateSubtotal,
   updateQuantity,
 } from "../store/slice/cartSlice";
+import SingleProduct from "../types";
+import { useEffect, useState } from "react";
 
 const CartTable = () => {
   const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
@@ -16,30 +18,56 @@ const CartTable = () => {
   );
   const dispatch = useDispatch();
 
+  const [quantities, setQuantities] = useState<{
+    [id: number]: number | string;
+  }>({});
+
+  const calculateSubtotal = (product: SingleProduct): number => {
+    return product.price * product.quantity!;
+  };
+
+  const handleOnFocus = (itemId: number) => {
+    setQuantities((prev) => ({ ...prev, [itemId]: "" }));
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     itemId: number
   ): void => {
-    const value = e.target.value;
-    const quantity = Number(e.target.value);
-
-    if (/^[+-]?\d+(\.\d+)?$/.test(value)) return;
-
-    if (quantity > 0 && quantity < 100) {
-      dispatch(updateQuantity({ itemId, quantity }));
-    }
+    setQuantities((prev) => ({ ...prev, [itemId]: e.target.value }));
   };
 
   const handleBlur = (
     e: React.ChangeEvent<HTMLInputElement>,
     itemId: number
   ): void => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
+    const parsedValue = Number(value);
 
-    if (value === "" || Number(value) < 1) {
+    console.log(value);
+    if (!value || isNaN(parsedValue)) {
       dispatch(updateQuantity({ itemId, quantity: 1 }));
+    } else if (parsedValue < 1) {
+      dispatch(updateQuantity({ itemId, quantity: 1 }));
+    } else if (parsedValue > 99) {
+      dispatch(updateQuantity({ itemId, quantity: 99 }));
+    } else {
+      dispatch(updateQuantity({ itemId, quantity: parsedValue }));
     }
+
+    setQuantities((prev) => ({ ...prev, [itemId]: parsedValue || 1 }));
   };
+
+  useEffect(() => {
+    const updatedQuantities: { [id: number]: number } = {};
+
+    cartItems.forEach((product) => {
+      updatedQuantities[product.id] = product.quantity!;
+    });
+
+    setQuantities(updatedQuantities);
+  }, [cartItems]);
+
 
   return (
     <>
@@ -95,8 +123,10 @@ const CartTable = () => {
                         </button>
                         <input
                           className={styles.quantityNumber}
-                          type="number"
-                          defaultValue={product.quantity}
+                          value={quantities[product.id] || ""}
+                          onFocus={() => {
+                            handleOnFocus(product.id);
+                          }}
                           onChange={(e) => handleInputChange(e, product.id)}
                           onBlur={(e) => handleBlur(e, product.id)}
                         />
@@ -110,7 +140,7 @@ const CartTable = () => {
                     </td>
                     <td>
                       <span className={styles.cellHeader}>Subtotal:</span>$
-                      {calculateSubtotal(cartItems, product.id).toFixed(2)}
+                      {calculateSubtotal(product).toFixed(2)}
                     </td>
                   </tr>
                 );
@@ -131,7 +161,11 @@ const CartTable = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.emptyCart}>Empty</div>
+        <div className={styles.emptyCart}>
+          <img className={styles.emptyCartIcon} src={emptyCart} alt="Empty Cart" />
+          <h3 className={styles.emptyCartHeading}>Your cart is empty</h3>
+          <p className={styles.emptyCartText}>Looks like you have not added anything to your cart. Go ahead and explore our products!</p>
+        </div>
       )}
     </>
   );
