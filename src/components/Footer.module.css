@@ -1,0 +1,101 @@
+.footer {
+    color: #fff;
+    background-color: black;
+}
+
+.footerBigDevices {
+    padding: 40px 0;
+}
+
+.logo {
+    width: 140px;
+    height: 23px;
+    margin-bottom: 15px;
+}
+
+.colsWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading {
+    margin-bottom: 15px;
+}
+
+.col p {
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.iconsWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    height: 25px;
+    margin-right: 10px;
+}
+
+.iconYT {
+    height: 35px;
+}
+
+.icon,
+.iconYT {
+    cursor: pointer;
+}
+
+
+.footerSmallDevices {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .footerBigDevices {
+        display: none;
+    }
+
+    .footerSmallDevices {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        z-index: 1000;
+        width: 100%;
+        overflow: hidden;
+        padding: 17px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background-color: black;
+    }
+
+    .wrapper {
+        position: relative;
+    }
+
+    .cartIcon {
+        width: 30px;
+        height: 35px;
+        display: block;
+        margin: 0 20px;
+
+    }
+
+    .numOfItems {
+        position: absolute;
+        bottom: 6px;
+        right: 2px;
+        color: #000;
+        background-color: #fff;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid #000;
+        line-height: 30px;
+    }
+
+
+}

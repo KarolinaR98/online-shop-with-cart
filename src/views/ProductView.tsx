@@ -13,7 +13,7 @@ const ProductView = () => {
   const product = products.find((product) => product.id === Number(params.id));
 
   return (
-    <div className="container">
+    <div className="container vh100">
       <p className={styles.path}>
         {product?.category} &gt; {product?.name}
       </p>

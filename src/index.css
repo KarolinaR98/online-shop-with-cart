@@ -14,7 +14,15 @@
     margin: 20px 0;
 }
 
+.vh100{
+    min-height: 100vh;
+}
+
 @media (max-width: 600px){
+    body{
+        margin-bottom: 80px;
+    }
+
     .container{
         width: 100%;
     }

@@ -12,9 +12,9 @@ import SingleProduct from "../types";
 import { useEffect, useState } from "react";
 
 const CartTable = () => {
-  const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
+  const cartItems = useSelector((state: RootState) => state.cart.cart);
   const totalPrice = useSelector(
-    (state: RootState) => state.cartReducer.totalPrice
+    (state: RootState) => state.cart.totalPrice
   );
   const dispatch = useDispatch();
 

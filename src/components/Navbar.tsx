@@ -8,12 +8,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
 const Navbar = () => {
-  const cartItems = useSelector((state: RootState) => state.cartReducer.cart);
+  const cartItems = useSelector((state: RootState) => state.cart.cart);
   const totalPrice = useSelector(
-    (state: RootState) => state.cartReducer.totalPrice
+    (state: RootState) => state.cart.totalPrice
   );
   const totalQuantity = useSelector(
-    (state: RootState) => state.cartReducer.totalQuantity
+    (state: RootState) => state.cart.totalQuantity
   );
 
   const [isCartVisible, setCartVisible] = useState<boolean>(false);
