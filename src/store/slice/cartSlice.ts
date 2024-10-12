@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import SingleProduct from "../../types";
+import { calculateQuantity, calculateTotal } from "../../helpers/cartHelpers";
 
 export interface CartState {
   cart: SingleProduct[];
@@ -16,25 +17,6 @@ const initialState: CartState = {
   cart: [],
   totalPrice: 0,
   totalQuantity: 0,
-};
-
-const calculateTotal = (cart: SingleProduct[]) => {
-  let totalPrice = 0;
-  cart.forEach((item) => {
-    totalPrice += item.price * item.quantity!;
-  });
-
-  return totalPrice;
-};
-
-const calculateQuantity = (cart: SingleProduct[]) => {
-  let totalQuantity = 0;
-
-  cart.forEach((item) => {
-    totalQuantity += item.quantity!;
-  });
-
-  return totalQuantity;
 };
 
 const cartSlice = createSlice({

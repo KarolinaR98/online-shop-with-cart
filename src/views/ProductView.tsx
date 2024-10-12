@@ -3,7 +3,6 @@ import styles from "./ProductView.module.css";
 import { products } from "../data";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/slice/cartSlice";
-import SingleProduct from "../types";
 
 const ProductView = () => {
   const params = useParams();
@@ -25,7 +24,15 @@ const ProductView = () => {
           <h2 className={styles.name}>{product?.name}</h2>
           <p className={styles.price}>${product?.price}</p>
           <p className={styles.description}>{product?.description}</p>
-          <button onClick={() => dispatch(addToCart(product as SingleProduct))} className={styles.btn}>Add to Cart</button>
+          <button
+            onClick={() => {
+              if (!product) return;
+              dispatch(addToCart(product));
+            }}
+            className={styles.btn}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

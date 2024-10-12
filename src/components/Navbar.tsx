@@ -20,7 +20,7 @@ const Navbar = () => {
   const dropdownCart = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let handler = (e: MouseEvent | TouchEvent) => {
+    const handler = (e: MouseEvent | TouchEvent) => {
       if (
         dropdownCart.current &&
         !dropdownCart.current.contains(e.target as Node)
@@ -30,6 +30,10 @@ const Navbar = () => {
     };
 
     document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
   });
 
   return (

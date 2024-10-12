@@ -26,10 +26,6 @@ const CartTable = () => {
     return product.price * product.quantity!;
   };
 
-  const handleOnFocus = (itemId: number) => {
-    setQuantities((prev) => ({ ...prev, [itemId]: "" }));
-  };
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     itemId: number
@@ -44,7 +40,6 @@ const CartTable = () => {
     const value = e.target.value.trim();
     const parsedValue = Number(value);
 
-    console.log(value);
     if (!value || isNaN(parsedValue)) {
       dispatch(updateQuantity({ itemId, quantity: 1 }));
     } else if (parsedValue < 1) {
@@ -124,9 +119,6 @@ const CartTable = () => {
                         <input
                           className={styles.quantityNumber}
                           value={quantities[product.id] || ""}
-                          onFocus={() => {
-                            handleOnFocus(product.id);
-                          }}
                           onChange={(e) => handleInputChange(e, product.id)}
                           onBlur={(e) => handleBlur(e, product.id)}
                         />
