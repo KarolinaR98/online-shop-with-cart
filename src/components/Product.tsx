@@ -15,12 +15,18 @@ const Product = (props: ProductProps) => {
     <>
       <div className={styles.productHolder}>
         <Link to={`/cart/${props.product.id}`}>
-          <img className={styles.photo} src={props.product.url} alt={props.product.url} />
+          <img
+            className={styles.photo}
+            src={props.product.url}
+            alt={props.product.url}
+          />
         </Link>
         <p className={styles.name}>{props.product.name}</p>
         <p className={styles.price}>${props.product.price}</p>
         <button
-          onClick={() => dispatch(addToCart(props.product))}
+          onClick={() =>
+            dispatch(addToCart({ product: props.product, quantity: 1 }))
+          }
           className={styles.btn}
         >
           Add to cart

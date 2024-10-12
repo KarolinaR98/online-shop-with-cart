@@ -13,9 +13,7 @@ import { useEffect, useState } from "react";
 
 const CartTable = () => {
   const cartItems = useSelector((state: RootState) => state.cart.cart);
-  const totalPrice = useSelector(
-    (state: RootState) => state.cart.totalPrice
-  );
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const dispatch = useDispatch();
 
   const [quantities, setQuantities] = useState<{
@@ -62,7 +60,6 @@ const CartTable = () => {
 
     setQuantities(updatedQuantities);
   }, [cartItems]);
-
 
   return (
     <>
@@ -154,9 +151,16 @@ const CartTable = () => {
         </div>
       ) : (
         <div className={styles.emptyCart}>
-          <img className={styles.emptyCartIcon} src={emptyCart} alt="Empty Cart" />
+          <img
+            className={styles.emptyCartIcon}
+            src={emptyCart}
+            alt="Empty Cart"
+          />
           <h3 className={styles.emptyCartHeading}>Your cart is empty</h3>
-          <p className={styles.emptyCartText}>Looks like you have not added anything to your cart. Go ahead and explore our products!</p>
+          <p className={styles.emptyCartText}>
+            Looks like you have not added anything to your cart. Go ahead and
+            explore our products!
+          </p>
         </div>
       )}
     </>

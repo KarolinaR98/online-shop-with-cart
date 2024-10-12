@@ -45,6 +45,13 @@
     background-color: #000;
 }
 
+.setAmount{
+    width: 40px;
+    height: 38px;
+    margin-right: 5px;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .productHolder {
         flex-direction: column;

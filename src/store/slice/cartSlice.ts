@@ -13,6 +13,11 @@ interface UpdateQuantityPayload {
   quantity: number;
 }
 
+interface AddToCartPayload {
+  product: SingleProduct;
+  quantity: number;
+}
+
 const initialState: CartState = {
   cart: [],
   totalPrice: 0,
@@ -23,15 +28,18 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<SingleProduct>) => {
+    addToCart: (state, action: PayloadAction<AddToCartPayload>) => {
       const itemInCart = state.cart.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.product.id
       );
 
       if (itemInCart?.quantity) {
-        itemInCart.quantity++;
+        itemInCart.quantity += action.payload.quantity;
       } else {
-        state.cart = state.cart.concat({ ...action.payload, quantity: 1 });
+        state.cart = state.cart.concat({
+          ...action.payload.product,
+          quantity: action.payload.quantity,
+        });
       }
 
       state.totalPrice = calculateTotal(state.cart);
@@ -68,21 +76,25 @@ const cartSlice = createSlice({
     },
 
     updateQuantity: (state, action: PayloadAction<UpdateQuantityPayload>) => {
-      const {itemId, quantity} = action.payload;
+      const { itemId, quantity } = action.payload;
       const itemInCart = state.cart.find((item) => item.id === itemId);
 
-      if(itemInCart) {
+      if (itemInCart) {
         itemInCart.quantity = quantity;
       }
 
       state.totalPrice = calculateTotal(state.cart);
       state.totalQuantity = calculateQuantity(state.cart);
-
-    }
+    },
   },
 });
 
-export const { addToCart, increaseQuantity, decreaseQuantity, removeItem, updateQuantity } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeItem,
+  updateQuantity,
+} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
 export default cartSlice;
