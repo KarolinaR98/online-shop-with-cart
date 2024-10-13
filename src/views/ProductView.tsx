@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "./ProductView.module.css";
 import { products } from "../data";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/slice/cartSlice";
 import { useState } from "react";
+import ImageMagnifier from "../components/ImageMagnifier";
 
 const ProductView = () => {
   const params = useParams();
@@ -31,11 +32,11 @@ const ProductView = () => {
   return (
     <div className="container vh100">
       <p className={styles.path}>
-        {product?.category} &gt; {product?.name}
+      <Link className={styles.link} to={"/"}>Home</Link> &gt; {product?.category} &gt; {product?.name}
       </p>
       <div className={styles.productHolder}>
         <div className={styles.imageHolder}>
-          <img className={styles.image} src={product?.url} alt="Product" />
+          {product && <ImageMagnifier imageUrl={product.url}/>}
         </div>
         <div className={styles.productDetails}>
           <h2 className={styles.name}>{product?.name}</h2>
