@@ -1,4 +1,4 @@
-import { CartState } from "./store/slice/cartSlice";
+import { CartState } from "../store/slice/cartSlice";
 
 export const loadFromLocalStorage = () => {
     try {
