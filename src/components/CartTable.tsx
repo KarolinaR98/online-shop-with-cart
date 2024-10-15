@@ -92,7 +92,7 @@ const CartTable = () => {
                     <td>
                       <img
                         className={styles.productPhoto}
-                        src={product.url}
+                        src={`/online-shop-with-cart/${product.url}`}
                         alt="Product"
                       />
                     </td>

@@ -1,5 +1,5 @@
 import ProductList from "../components/ProductList";
-import { products } from "../data";
+import { products } from "../../public/data.ts";
 
 const Home = () => {  
 

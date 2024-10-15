@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import styles from "./ProductView.module.css";
-import { products } from "../data";
+import { products } from "../../public/data";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/slice/cartSlice";
 import { useState } from "react";

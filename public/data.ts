@@ -1,4 +1,4 @@
-import SingleProduct from "./types";
+import SingleProduct from "../src/types";
 
 export const products: SingleProduct[] = [
     {
@@ -7,7 +7,7 @@ export const products: SingleProduct[] = [
       description: "High-quality wireless headphones with noise cancellation.",
       price: 99.99,
       category: "Electronics",
-      url: "/wireless_headphones.jpg",
+      url: "wireless_headphones.jpg",
     },
     {
       id: 2,
@@ -15,7 +15,7 @@ export const products: SingleProduct[] = [
       description: "Latest model smartphone with 128GB storage.",
       price: 599.99,
       category: "Electronics",
-      url: "/smartphone.jpg",
+      url: "smartphone.jpg",
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ export const products: SingleProduct[] = [
         "Comfortable and lightweight running shoes for all terrains.",
       price: 79.99,
       category: "Sportswear",
-      url: "/running_shoes.jpg",
+      url: "running_shoes.jpg",
     },
     {
       id: 4,
@@ -32,7 +32,7 @@ export const products: SingleProduct[] = [
       description: "Durable and spacious backpack with multiple compartments.",
       price: 49.99,
       category: "Accessories",
-      url: "/backpack.jpg",
+      url: "backpack.jpg",
     },
     {
       id: 5,
@@ -40,7 +40,7 @@ export const products: SingleProduct[] = [
       description: "Water-resistant smartwatch with health tracking features.",
       price: 199.99,
       category: "Electronics",
-      url: "/smartwatch.jpg",
+      url: "smartwatch.jpg",
     },
     {
       id: 6,
@@ -48,7 +48,7 @@ export const products: SingleProduct[] = [
       description: "Portable Bluetooth speaker with excellent sound quality.",
       price: 39.99,
       category: "Electronics",
-      url: "/bluetooth_speaker.jpg",
+      url: "bluetooth_speaker.jpg",
     },
     {
       id: 7,
@@ -56,7 +56,7 @@ export const products: SingleProduct[] = [
       description: "Eco-friendly yoga mat with non-slip surface.",
       price: 29.99,
       category: "Fitness",
-      url: "/yoga_mat.jpg",
+      url: "yoga_mat.jpg",
     },
     {
       id: 8,
@@ -65,7 +65,7 @@ export const products: SingleProduct[] = [
         "Lightweight laptop with a powerful processor and long battery life.",
       price: 899.99,
       category: "Electronics",
-      url: "/laptop.jpg",
+      url: "laptop.jpg",
     },
     {
       id: 9,
@@ -73,7 +73,7 @@ export const products: SingleProduct[] = [
       description: "Stylish sunglasses with UV protection.",
       price: 19.99,
       category: "Accessories",
-      url: "/sunglasses.jpg",
+      url: "sunglasses.jpg",
     },
     {
       id: 10,
@@ -82,6 +82,6 @@ export const products: SingleProduct[] = [
         "Ergonomic gaming chair with adjustable armrests and lumbar support.",
       price: 149.99,
       category: "Furniture",
-      url: "/gaming_chair.jpg",
+      url: "gaming_chair.jpg",
     },
   ];
